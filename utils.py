@@ -1,6 +1,13 @@
-from cProfile import label
+from typing import Annotated
 
-def get_stock_prices(stock_symbols, start_date, end_date):
+import pandas as pd
+
+
+def get_stock_prices(
+        stock_symbols: Annotated[str | list, "The stock symbols to get the prices for"],
+        start_date: Annotated[str, "The start date in the format 'YYYY-MM-DD'"],
+        end_date: Annotated[str, "The end date in the format 'YYYY-MM-DD'"]
+):
     """
     Get the stock prices for the given stock symbols between
     the start and end dates.
@@ -24,11 +31,14 @@ def get_stock_prices(stock_symbols, start_date, end_date):
     return stock_data.get("Close")
 
 
-def plot_stock_prices(stock_prices, filename):
+def plot_stock_prices(
+        stock_prices: Annotated[pd.DataFrame, "The stock prices for the given stock symbols"],
+        filename: Annotated[str, "The desired file name for saving the code in"]
+):
     """
     Plot the stock prices for the given stock symbols.
 
-    :param stock_prices (pandas.DataFrame): The stock prices for the
+    :param stock_prices: (pandas.DataFrame) The stock prices for the
     given stock symbols.
     :param filename: The desired file name for saving the code in.
     """
